@@ -1,0 +1,38 @@
+## Allow HTTP access to this directory
+Order deny,allow
+Allow from all
+##
+
+## Deny previewing of folders
+Options -Indexes
+
+## Deny access to this .htaccess file
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+##
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    ## Allow use of PHP filenames without file extension in links
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    RewriteRule ^(.*)$ $1.php [QSA,L]
+    ##
+
+    ## Route all requests to /index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteCond %{REQUEST_URI} ^.+(\.php)?$
+    RewriteRule ^(.*)$ index.php [QSA,L]
+    ##
+
+    ## Force https
+    #RewriteCond %{HTTP_HOST} ^attendx.local [NC]
+    #RewriteCond %{SERVER_PORT} 80
+    #RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+    ##
+</IfModule>
