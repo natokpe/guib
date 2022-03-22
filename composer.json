@@ -1,0 +1,18 @@
+{
+    "name": "natokpe/guib",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "natokpe\\Guib\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nat Okpe",
+            "email": "natokpe@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
